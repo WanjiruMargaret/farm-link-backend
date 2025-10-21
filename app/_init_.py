@@ -1,4 +1,9 @@
 from app import db
+from .extensions import db
+
+from dotenv import load_dotenv
+load_dotenv()
+
 
 from .user import User
 from .crop import Crop
