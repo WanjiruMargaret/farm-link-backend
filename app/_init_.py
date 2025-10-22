@@ -1,27 +1,32 @@
-from .extensions import db
-from dotenv import load_dotenv
+from flask import Flask
+from .extensions import db, bcrypt, migrate, jwt
+from config import Config
 
-load_dotenv()
+# Blueprints
+from .routes.auth_routes import auth_bp
+from .routes.crop_routes import crop_bp
+from .routes.livestock_routes import livestock_bp
+from .routes.market_routes import market_bp
+from .routes.post_routes import post_bp
+from .routes.notification_routes import notification_bp
 
-from .user import User
-from .crop import Crop
-from .livestock import Livestock
-from .disease import Disease
-from .market import Market
-from .weather import Weather
-from .post import Post
-from .notification import Notification
-from .relations import CropDisease, LivestockDisease
 
-__all__ = [
-    "User",
-    "Crop",
-    "Livestock",
-    "Disease",
-    "Market",
-    "Weather",
-    "Post",
-    "Notification",
-    "CropDisease",
-    "LivestockDisease",
-]
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config)
+
+    # Initialize extensions
+    db.init_app(app)
+    bcrypt.init_app(app)
+    migrate.init_app(app, db)
+    jwt.init_app(app)
+
+    # Register blueprints
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(crop_bp)
+    app.register_blueprint(livestock_bp)
+    app.register_blueprint(market_bp)
+    app.register_blueprint(post_bp)
+    app.register_blueprint(notification_bp)
+
+    return app
