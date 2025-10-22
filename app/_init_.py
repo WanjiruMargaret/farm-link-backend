@@ -1,9 +1,7 @@
-from app import db
 from .extensions import db
-
 from dotenv import load_dotenv
-load_dotenv()
 
+load_dotenv()
 
 from .user import User
 from .crop import Crop
@@ -16,7 +14,14 @@ from .notification import Notification
 from .relations import CropDisease, LivestockDisease
 
 __all__ = [
-    "User", "Crop", "Livestock", "Disease", 
-    "Market", "Weather", "Post", "Notification",
-    "CropDisease", "LivestockDisease"
+    "User",
+    "Crop",
+    "Livestock",
+    "Disease",
+    "Market",
+    "Weather",
+    "Post",
+    "Notification",
+    "CropDisease",
+    "LivestockDisease",
 ]
