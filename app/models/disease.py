@@ -1,4 +1,4 @@
-from app import db
+from extensions import db
 
 class Disease(db.Model):
     __tablename__ = 'diseases'

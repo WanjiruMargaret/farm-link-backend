@@ -1,4 +1,4 @@
-from app import db
+from extensions import db
 
 class Weather(db.Model):
     __tablename__ = 'weather'
