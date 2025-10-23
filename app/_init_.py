@@ -9,7 +9,7 @@ from .routes.livestock_routes import livestock_bp
 from .routes.market_routes import market_bp
 from .routes.post_routes import post_bp
 from .routes.notification_routes import notification_bp
-
+from .routes.weather_routess import weather_bp
 
 def create_app():
     app = Flask(__name__)
@@ -28,5 +28,6 @@ def create_app():
     app.register_blueprint(market_bp)
     app.register_blueprint(post_bp)
     app.register_blueprint(notification_bp)
+    app.register_blueprint(weather_bp)
 
     return app
