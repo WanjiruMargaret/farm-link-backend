@@ -12,11 +12,11 @@ class User(db.Model):
     location = db.Column(db.String(100))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    # Relationships
-    crops = db.relationship("Crop", backref="user", lazy=True)
-    livestock = db.relationship("Livestock", backref="user", lazy=True)
-    posts = db.relationship("Post", backref="user", lazy=True)
-    notifications = db.relationship("Notification", backref="user", lazy=True)
+     #Relationships
+   # crops = db.relationship("Crop", backref="user", lazy=True)
+    #livestock = db.relationship("Livestock", backref="user", lazy=True)
+    #posts = db.relationship("Post", backref="user", lazy=True)
+    #notifications = db.relationship("Notification", backref="user", lazy=True)
 
     def set_password(self, password):
         self.password = bcrypt.generate_password_hash(password).decode("utf-8")
