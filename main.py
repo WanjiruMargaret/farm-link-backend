@@ -28,6 +28,9 @@ def create_farm_link_app():
 
     return flask_app
 
+create_app = create_farm_link_app
+
+
 
 if __name__ == "__main__":
     app = create_farm_link_app()
