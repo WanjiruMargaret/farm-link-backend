@@ -8,9 +8,9 @@ class Post(db.Model):
     title = db.Column(db.String(120), nullable=False)
     content = db.Column(db.Text, nullable=False)
     image_url = db.Column(db.String, nullable=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user.id'))
 
     user = db.relationship('User', back_populates='posts')
 
     def __repr__(self):
-        return f"<post {self.type}>"
+        return f"<post {self.title}>"

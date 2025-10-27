@@ -24,7 +24,13 @@ def create_farm_link_app():
 
     # ✅ Register Blueprints
     from app.routes.auth_routes import auth_bp
+    from app.routes.market_routes import market_bp
+    from app.routes.post_routes import post_bp
+
+
     flask_app.register_blueprint(auth_bp, url_prefix="/api/auth")
+    flask_app.register_blueprint(market_bp, url_prefix="/api/market")
+    flask_app.register_blueprint(post_bp, url_prefix='/api/post')
 
     return flask_app
 

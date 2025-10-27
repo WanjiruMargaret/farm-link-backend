@@ -6,16 +6,15 @@ market_bp = Blueprint('market', __name__)
 
 @market_bp.route('/', methods=['GET'])
 def get_market_items():
-    items = Market.query.all()
+    items = Market.query.all() ## fetch all data from DB
     return jsonify([item.to_dict() for item in items]), 200
 
 @market_bp.route('/', methods=['POST'])
-def add_market_item():
-    data = request.get_json()
+def market_item():
+    data = request.get_json() ## read jyson from the frontend
     new_item = Market(
         name=data.get('name'),
-        price=data.get('price'),
-        status='Available'
+        price=data.get('price')
     )
     db.session.add(new_item)
     db.session.commit()

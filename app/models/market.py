@@ -10,7 +10,7 @@ class Market(db.Model):
     price = db.Column(db.Float, nullable=False)
     status = db.Column(db.String(50), default='Available')
     image_url = db.Column(db.String, nullable=True)
-    seller_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    seller_id = db.Column(db.Integer, db.ForeignKey('users.user.id'))
 
 
     seller = db.relationship('User', back_populates='market_items')
