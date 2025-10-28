@@ -1,16 +1,19 @@
 from extensions import db
-##from datetime import datetime
+from datetime import datetime
 
 class Post(db.Model):
     __tablename__ = 'posts'
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(120), nullable=False)
+    title = db.Column(db.String(150), nullable=False)
     content = db.Column(db.Text, nullable=False)
-    image_url = db.Column(db.String, nullable=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user.id'))
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
 
-    user = db.relationship('User', back_populates='posts')
-
+    
+    user = db.relationship('User', back_populates='posts') 
+    
     def __repr__(self):
-        return f"<post {self.title}>"
+        return f"<Post {self.title}>"
+
+
