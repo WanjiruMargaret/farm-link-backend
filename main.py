@@ -24,13 +24,25 @@ def create_farm_link_app():
 
     # ✅ Register Blueprints
     from app.routes.auth_routes import auth_bp
+    from app.routes.crop_routes import crop_bp
     from app.routes.market_routes import market_bp
+    from app.routes.livestock_routes import livestock_bp
     from app.routes.post_routes import post_bp
+    from app.routes.weather_routess import weather_bp
+    from app.routes.notification_routes import notification_bp
+    from app.routes.gemini_routes import gemini_bp
+    from app.routes.upload_routes import upload_bp
 
-
+    
     flask_app.register_blueprint(auth_bp, url_prefix="/api/auth")
+    flask_app.register_blueprint(crop_bp, url_prefix="/api/crop")
     flask_app.register_blueprint(market_bp, url_prefix="/api/market")
+    flask_app.register_blueprint(livestock_bp, url_prefix="/api/livestock")
     flask_app.register_blueprint(post_bp, url_prefix='/api/post')
+    flask_app.register_blueprint(weather_bp, url_prefix="/api/weather")
+    flask_app.register_blueprint(notification_bp, url_prefix="/api/notification")
+    flask_app.register_blueprint(gemini_bp, url_prefix='/api/gemini')
+    flask_app.register_blueprint(upload_bp, url_prefix='/api/upload')
 
     return flask_app
 

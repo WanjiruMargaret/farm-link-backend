@@ -7,4 +7,8 @@ class Config:
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.getenv("SECRET_KEY", "supersecretkey")
+    CLOUDINARY_CLOUD_NAME = os.getenv("Monopoly_game")
+    CLOUDINARY_API_KEY = os.getenv("669932343378715")
+    CLOUDINARY_API_SECRET = os.getenv("LCzvNXOHTfR_4TZBINRNz3EZzuc")
+    GEMINI_API_KEY = os.getenv("AIzaSyDoSIJcxUyyAddM54Nd13iSW8UDsy-vhIs")
     
