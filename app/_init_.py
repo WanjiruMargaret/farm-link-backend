@@ -10,7 +10,8 @@ from .routes.market_routes import market_bp
 from .routes.post_routes import post_bp
 from .routes.notification_routes import notification_bp
 from .routes.weather_routess import weather_bp
-
+from .routes.gemini_routes import gemini_bp
+from .routes.upload_routes import upload_bp 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
@@ -29,5 +30,7 @@ def create_app():
     app.register_blueprint(post_bp)
     app.register_blueprint(notification_bp)
     app.register_blueprint(weather_bp)
+    app.register_blueprint(gemini_bp)
+    app.register_blueprint(upload_bp)
 
     return app

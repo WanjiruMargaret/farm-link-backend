@@ -1,7 +1,8 @@
 from flask import Flask
 from config import Config
 from extensions import db, migrate, bcrypt, jwt
-from flask_cors import CORS  # ✅ new import
+from flask_cors import CORS 
+import cloudinary # ✅ new import
 #from app import models  # import all models
 
 
@@ -15,7 +16,15 @@ def create_farm_link_app():
     bcrypt.init_app(flask_app)
     jwt.init_app(flask_app)
 
-    import app.models  # Ensure models are imported so that they are registered with SQLAlchemy
+    import app.models 
+    
+    cloudinary.config(
+    cloud_name=flask_app.config["CLOUDINARY_CLOUD_NAME"],
+    api_key=flask_app.config["CLOUDINARY_API_KEY"],
+    api_secret=flask_app.config["CLOUDINARY_API_SECRET"]
+) 
+    
+    # Ensure models are imported so that they are registered with SQLAlchemy
 
     # ✅ Enable CORS so frontend (React/PWA) can make requests
     CORS(flask_app, origins="*")  

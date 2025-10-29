@@ -1,4 +1,6 @@
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 class Config:
     SQLALCHEMY_DATABASE_URI = os.getenv(
@@ -7,8 +9,8 @@ class Config:
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.getenv("SECRET_KEY", "supersecretkey")
-    CLOUDINARY_CLOUD_NAME = os.getenv("Monopoly_game")
-    CLOUDINARY_API_KEY = os.getenv("669932343378715")
-    CLOUDINARY_API_SECRET = os.getenv("LCzvNXOHTfR_4TZBINRNz3EZzuc")
-    GEMINI_API_KEY = os.getenv("AIzaSyDoSIJcxUyyAddM54Nd13iSW8UDsy-vhIs")
+    CLOUDINARY_CLOUD_NAME = os.getenv("CLOUDINARY_CLOUD_NAME")
+    CLOUDINARY_API_KEY = os.getenv("CLOUDINARY_API_KEY")
+    CLOUDINARY_API_SECRET = os.getenv("CLOUDINARY_API_SECRET")
+    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
     

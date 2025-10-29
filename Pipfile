@@ -9,6 +9,10 @@ flask-sqlalchemy = "*"
 flask-migrate = "*"
 psycopg = {extras = ["binary", "pool"], version = "*"}
 python-dotenv = "*"
+psycopg2-binary = "*"
+google = "*"
+google-genai = "*"
+google-generativeai = "*"
 
 [dev-packages]
 
