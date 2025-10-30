@@ -15,9 +15,11 @@ from .notification import Notification
 from .relations import CropDisease, LivestockDisease
 
 User.crops = db.relationship('Crop', backref='user', lazy=True)
-User.livestock = db.relationship('Livestock', backref='user', lazy=True)
-User.posts = db.relationship('Post', backref='user', lazy=True)
+User.livestock = db.relationship('Livestock', back_populates='user', lazy=True)
+User.posts = db.relationship('Post', back_populates='user', lazy=True)
 User.notifications = db.relationship('Notification', backref='user', lazy=True)
+User.market_items = db.relationship('Market', back_populates='seller', lazy=True)
+
 
 __all__ = [
     "User",

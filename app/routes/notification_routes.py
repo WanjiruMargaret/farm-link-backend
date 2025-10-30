@@ -1,19 +1,34 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, abort
 from extensions import db
 from app.models.notification import Notification
 
 notification_bp = Blueprint('notifications', __name__)
 
-@notification_bp.route('/', methods=['GET']) ## get all the notifications
+# --- Helper function for secure user retrieval (MOCK/PLACEHOLDER) ---
+# NOTE: This MUST be replaced with actual user ID retrieval from your JWT token or session.
+def get_current_user_id():
+    # TODO: Implement secure user ID retrieval based on your authentication system.
+    # We use '1' as a placeholder for the current logged-in user for initial testing.
+    return 1 
+
+@notification_bp.route('/', methods=['GET']) ## get all the notifications for the current user
 def get_notifications():
-    notifications = Notification.query.order_by(Notification.created_at.desc()).all() ## sirt the latest notification(newest)to pop 
+    user_id = get_current_user_id()
+    # CRITICAL FIX: Filter notifications only for the current user
+    notifications = Notification.query.filter_by(user_id=user_id).order_by(Notification.created_at.desc()).all()
     
-    return jsonify([n.to_dict() for n in notifications]), 200 ## successful responce 
+    return jsonify([n.to_dict() for n in notifications]), 200 ## successful response 
 
 @notification_bp.route('/<int:id>/read', methods=['PATCH'])
 def mark_as_read(id):
-    # Find the notification by its ID, or return 404 if not found
-    notification = Notification.query.get_or_404(id)
+    user_id = get_current_user_id()
+    # SECURITY CHECK: Find the notification by ID AND ensure it belongs to the current user
+    notification = Notification.query.filter_by(id=id, user_id=user_id).first()
+    
+    if notification is None:
+        # If the notification doesn't exist or doesn't belong to the user, return 404
+        abort(404, description=f"Notification with ID {id} not found for current user.")
+
     notification.read = True
     db.session.commit()
     
@@ -22,21 +37,30 @@ def mark_as_read(id):
 @notification_bp.route('/', methods=['POST'])
 def create_notification():
     data = request.get_json()
+    
+    # Validate required fields
+    if 'message' not in data or 'user_id' not in data:
+        return jsonify({'message': 'Missing required fields: message and user_id'}), 400
+        
     new_notification = Notification( ## new notification 
+        user_id=data.get('user_id'), 
         message=data.get('message')
     )
     db.session.add(new_notification)
     db.session.commit()
 
-    
-    print("You have a new notification!") ## this will help the user to know of any notifications 
-
+    print(f"New notification created for user {new_notification.user_id}!")
     return jsonify(new_notification.to_dict()), 201
 
 
 @notification_bp.route('/<int:id>', methods=['DELETE'])
 def delete_notification(id):
-    notification = Notification.query.get_or_404(id)
+    user_id = get_current_user_id()
+    # SECURITY CHECK: Find and delete the notification only if it belongs to the current user
+    notification = Notification.query.filter_by(id=id, user_id=user_id).first()
+    
+    if notification is None:
+        abort(404, description=f"Notification with ID {id} not found for current user.")
 
     db.session.delete(notification)
     db.session.commit()

@@ -23,7 +23,7 @@ def create_app():
     jwt.init_app(app)
 
     # Register blueprints
-    app.register_blueprint(auth_bp)
+    app.register_blueprint(auth_bp, url_prefix='/api')
     app.register_blueprint(crop_bp)
     app.register_blueprint(livestock_bp)
     app.register_blueprint(market_bp)

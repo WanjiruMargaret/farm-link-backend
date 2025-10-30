@@ -11,7 +11,7 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
 
     
-    user = db.relationship('User', back_populates='posts') 
+    #user = db.relationship('User', back_populates='posts') 
     
     def __repr__(self):
         return f"<Post {self.title}>"

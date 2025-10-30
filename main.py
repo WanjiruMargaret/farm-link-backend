@@ -27,7 +27,8 @@ def create_farm_link_app():
     # Ensure models are imported so that they are registered with SQLAlchemy
 
     # ✅ Enable CORS so frontend (React/PWA) can make requests
-    CORS(flask_app, origins="*")  
+    
+    CORS(flask_app, resources={r"/api/*": {"origins": "http://localhost:5173"}}, supports_credentials=True)
     # You can restrict later, for example:
     # CORS(app, origins=["http://localhost:3000", "https://yourfrontend.com"])
 

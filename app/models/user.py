@@ -11,6 +11,7 @@ class User(db.Model):
     role = db.Column(db.String(50))
     location = db.Column(db.String(100))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    market_items = db.relationship('Market', back_populates='seller', lazy=True)
 
      #Relationships
    # crops = db.relationship("Crop", backref="user", lazy=True)
