@@ -48,9 +48,9 @@ def create_farm_link_app():
     flask_app.register_blueprint(crop_bp, url_prefix="/api/crop")
     flask_app.register_blueprint(market_bp, url_prefix="/api/market")
     flask_app.register_blueprint(livestock_bp, url_prefix="/api/livestock")
-    flask_app.register_blueprint(post_bp, url_prefix='/api/post')
+    flask_app.register_blueprint(post_bp, url_prefix='/api/posts')
     flask_app.register_blueprint(weather_bp, url_prefix="/api/weather")
-    flask_app.register_blueprint(notification_bp, url_prefix="/api/notification")
+    flask_app.register_blueprint(notification_bp, url_prefix="/api/notifications")
     flask_app.register_blueprint(gemini_bp, url_prefix='/api/gemini')
     flask_app.register_blueprint(upload_bp, url_prefix='/api/upload')
 

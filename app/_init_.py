@@ -27,7 +27,7 @@ def create_app():
     app.register_blueprint(crop_bp)
     app.register_blueprint(livestock_bp)
     app.register_blueprint(market_bp)
-    app.register_blueprint(post_bp)
+    app.register_blueprint(post_bp, url_prefix='/api/post')
     app.register_blueprint(notification_bp)
     app.register_blueprint(weather_bp)
     app.register_blueprint(gemini_bp)
