@@ -6,7 +6,7 @@ notification_bp = Blueprint('notifications', __name__)
 
 @notification_bp.route('/', methods=['GET']) ## get all the notifications
 def get_notifications():
-    notifications = Notification.query.order_by(Notification.created_at.desc()).all() ## sirt the latest notification(newest)to pop 
+    notifications = Notification.query.order_by(Notification.created_at.desc()).all() ## show the latest notification(newest)to pop 
     
     return jsonify([n.to_dict() for n in notifications]), 200 ## successful responce 
 
